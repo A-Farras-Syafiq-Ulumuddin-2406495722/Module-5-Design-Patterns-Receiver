@@ -59,14 +59,14 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   Open another new terminal, edit `ROCKET_PORT` in `.env` to `8003`, then execute `cargo run`.
 
 ## Mandatory Checklists (Subscriber)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop-receiver to a new repository.
+-   [x] Clone https://gitlab.com/ichlaffterlalu/bambangshop-receiver to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create SubscriberRequest model struct.`
-    -   [ ] Commit: `Create Notification database and Notification repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Notification repository.`
-    -   [ ] Commit: `Implement list_all_as_string function in Notification repository.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
+    -   [x] Commit: `Create Notification model struct.`
+    -   [x] Commit: `Create SubscriberRequest model struct.`
+    -   [x] Commit: `Create Notification database and Notification repository struct skeleton.`
+    -   [x] Commit: `Implement add function in Notification repository.`
+    -   [x] Commit: `Implement list_all_as_string function in Notification repository.`
+    -   [x] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 3: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -85,5 +85,12 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+
+1. Di BambangShop, kita memiliki banyak subscriber yang ingin melakukan read pada waktu yang sama, sedangkan publisher hanya membutuhkan untuk write (add) notification baru.
+
+Kita tahu bahwa Rust sangat ketat pada "Data Races" pengguna RwLock cocok untuk ini berdasarkan paragraf sebelumnya. Lalu kalau Mutex bagaimana? Mutex hanya bisa dilakukan oleh satu thread baik itu melakukan read atau write. Maka akan terjadi permasalahan performa bottleneck karena thread-thread lain harus menunggu untuk melihat notification yang diberikan.
+
+2. Rust melakukan ini demi memory safety dan menghindari data races. Sedangkan untuk Java masalah ini akan tergantung dari developernya.
+Rust membutuhkan static value harus ada saat compile time. Namun struktur seperti Vec atau DashMap membutuhkan runtime heap allocation sehingga tidak bisa di-initialize secara langsung. Adanya `lazy_static` menyelesaikan masalah ini dengan memberi delay pada initialization hingga data bener-bener dibutuhkan.
 
 #### Reflection Subscriber-2
