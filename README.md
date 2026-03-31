@@ -94,3 +94,11 @@ Kita tahu bahwa Rust sangat ketat pada "Data Races" pengguna RwLock cocok untuk 
 Rust membutuhkan static value harus ada saat compile time. Namun struktur seperti Vec atau DashMap membutuhkan runtime heap allocation sehingga tidak bisa di-initialize secara langsung. Adanya `lazy_static` menyelesaikan masalah ini dengan memberi delay pada initialization hingga data bener-bener dibutuhkan.
 
 #### Reflection Subscriber-2
+
+1. Saya sedikit melihat `src/lib.rs` dan yang saya dapati bahwa terdapat variabel-variabel yang saya sekilas lihat saat mengerjakan tutorial seperti `REQWEST_CLIENT` dan saya menyimpulkan dengan adanya lib ini bertujuan untuk tidak perlu menulis kode yang berulang serta kita bisa memanggilanya dengan mudah pada bagian kode dimanapun.
+
+2. Observer pattern mengadakan loose coupling sehingga memudahkan penambahan Subscriber. Publisher tidak perlu tahu cara kerjanya Receiver dan ia cukup tau menyimap daftar URL serta mengirimkan permintaan ke semua URL tersebut.
+
+Ketika menjalankan lebih dari satu instansi Publisher akan menjadi lebih sulit karena bila terdapat daftar pelanggan yang hanya simpan di memori lokal masing-masing, setiap isntansi tidak akan memiliki daftar yang sama. Solusinya dengan menghubungkan semua instansi tersebut ke satu basis data.
+
+3. Selama ini saya belum melakukannya dan mungkin akan melakukannya di waktu yang akan datang.
